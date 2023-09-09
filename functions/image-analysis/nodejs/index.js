@@ -33,6 +33,28 @@ exports.vision_analysis = async (event, context) => {
         ]
     };
 
+
+    const admin = require('firebase-admin');
+admin.initializeApp();
+
+
+
+
+// Middleware to verify user token
+async function verifyUser(req, res, next) {
+  const idToken = req.headers.authorization;
+  try {
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    req.user = decodedToken;
+    next();  // proceed to the next middleware or route handler
+  } catch (error) {
+    res.status(401).send('Unauthorized');  // if verification fails, send a 401 Unauthorized response
+  }
+}
+
+
+
+
     // invoking the Vision API
     const [response] = await client.annotateImage(request);
     console.log(`Raw vision output for: ${filename}: ${JSON.stringify(response)}`);
