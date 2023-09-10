@@ -40,7 +40,9 @@ admin.initializeApp();
 
 
 
-// Middleware to verify user token
+
+//Middleware to verify user token
+/*
 async function verifyUser(req, res, next) {
   const idToken = req.headers.authorization;
   try {
@@ -50,7 +52,7 @@ async function verifyUser(req, res, next) {
   } catch (error) {
     res.status(401).send('Unauthorized');  // if verification fails, send a 401 Unauthorized response
   }
-}
+}*/
 
 
 

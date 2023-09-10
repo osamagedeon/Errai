@@ -31,13 +31,13 @@ function signup(email, password) {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // Signed in 
-        var user = userCredential.user;
-        // ...
+        const user = userCredential.user;
+        // TODO: Redirect or update UI
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // TODO: Show error message to the user
       });
   }
   
@@ -46,14 +46,32 @@ function signup(email, password) {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         // Signed in
-        var user = userCredential.user;
-        // ...
+        const user = userCredential.user;
+        // TODO: Redirect or update UI
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // TODO: Show error message to the user
       });
   }
+
+  
+
+  document.getElementById('signup-btn').addEventListener('click', function() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    signup(email, password);  // Call the signup function
+  });
+  
+  document.getElementById('auth-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    login(email, password);  // Call the login function
+  });
+  
+  
   
 var app = new Vue({
   el: '#app',
